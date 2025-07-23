@@ -1,0 +1,37 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Admin {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String   // hashed
+  createdAt DateTime @default(now())
+}
+
+model ChatUser {
+  id            String   @id @default(cuid())
+  sessionId     String   @unique
+  ipAddress     String?
+  userAgent     String?
+  createdAt     DateTime @default(now())
+  messages      Message[]
+  aiEnabled     Boolean  @default(true)
+  assignedAdmin String?  // Admin ID who is handling this chat
+  lastSeen      DateTime @default(now())
+}
+
+model Message {
+  id        String   @id @default(cuid())
+  content   String
+  sender    String   // 'user' | 'admin' | 'ai'
+  isAi      Boolean  @default(false)
+  createdAt DateTime @default(now())
+  userId    String
+  chatUser  ChatUser @relation(fields: [userId], references: [id])
+}

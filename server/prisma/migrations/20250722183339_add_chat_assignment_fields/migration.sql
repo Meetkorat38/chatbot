@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "ChatUser" ADD COLUMN     "assignedAdmin" TEXT,
+ADD COLUMN     "lastSeen" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP;
