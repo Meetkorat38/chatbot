@@ -104,8 +104,13 @@ npm run dev
 # Database
 DATABASE_URL="your-postgresql-connection-string"
 
-# Server
+# Server Configuration
 PORT=5000
+NODE_ENV="development"
+
+# Frontend Configuration (for CORS security)
+FRONTEND_URL="http://localhost:3000"
+# For Production: FRONTEND_URL="https://your-frontend-domain.com"
 
 # Authentication
 JWT_SECRET="your-super-secret-jwt-key"
@@ -234,11 +239,14 @@ npm start
 ### Environment Configuration
 Update these for production:
 ```env
-# Frontend
+# Frontend (.env.local)
 NEXT_PUBLIC_API_BASE_URL="https://your-api-domain.com"
+NEXT_PUBLIC_SOCKET_URL="https://your-api-domain.com"
 NEXT_PUBLIC_ENV="production"
 
-# Backend
+# Backend (.env)
+NODE_ENV="production"
+FRONTEND_URL="https://your-frontend-domain.com"
 DATABASE_URL="your-production-db-url"
 PORT=5000
 ```

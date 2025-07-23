@@ -1,20 +1,19 @@
 import express from "express"
 import cors from "cors"
-import dotenv from "dotenv"
 import requestIp from "request-ip"
 import authRoutes from "./routes/authRoutes"
 import adminRoutes from "./routes/adminRoutes"
 import systemRoutes from "./routes/systemRoutes"
 import { verifyToken } from "./middleware/verifyToken"
-
-dotenv.config()
+import { SERVER_CONFIG, getCorsOptions } from "./config"
 
 const app = express()
 
 // Trust proxy for accurate IP detection (important for production)
 app.set('trust proxy', true)
 
-app.use(cors({ origin: "*", credentials: true }))
+// Environment-based CORS configuration
+app.use(cors(getCorsOptions()))
 app.use(express.json())
 
 // Use request-ip middleware for consistent IP detection
