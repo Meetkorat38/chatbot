@@ -5,8 +5,8 @@ dotenv.config()
 
 // Server configuration for environment-based settings
 export const SERVER_CONFIG = {
-  // Server settings
-  PORT: process.env.PORT || 5000,
+  // Server settings - Ensure PORT is a number for proper server binding
+  PORT: parseInt(process.env.PORT || '5000', 10),
   ENV: process.env.NODE_ENV || 'development',
   
   // Frontend configuration (for CORS)
